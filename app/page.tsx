@@ -38,6 +38,15 @@ export default function Home() {
         {display}
       </div>
 
+      {/* Fila Científica: Potencias */}
+      <div className="grid grid-cols-2 gap-2 mb-2">
+        <button className="btn btn-fn" onClick={() => handleOperation('^')}>xʸ</button>
+        <button className="btn btn-fn" onClick={() => {
+          const val = parseFloat(display);
+          setDisplay(String(calculate(val, val, 'square')));
+        }}>x²</button>
+      </div>
+
       {/* Teclado: LÍNEA CRÍTICA DE CONFLICTO (ambos insertarán filas/botones aquí) */}
       <div className="grid grid-cols-4 gap-2">
         {/* Fila 1: Acciones básicas */}
