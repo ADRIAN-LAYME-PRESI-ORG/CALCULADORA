@@ -1,12 +1,13 @@
 'use client';
 import { useState } from 'react';
-import { calculate, Operation, removeLastChar, HistoryItem, addHistoryEntry, resetCalculatorState, clearHistory } from './calculator';
+import { calculate, Operation, removeLastChar, HistoryItem, addHistoryEntry, resetCalculatorState, clearHistory, memoryAdd, memorySubtract } from './calculator';
 
 export default function Home() {
   const [display, setDisplay] = useState('0');
   const [prev, setPrev] = useState<number | null>(null);
   const [op, setOp] = useState<Operation | null>(null);
   const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [memory, setMemory] = useState<number>(0);
 
   const handleDigit = (digit: string) => {
     setDisplay((current) => (current === '0' ? digit : current + digit));
@@ -42,6 +43,14 @@ export default function Home() {
       {/* Pantalla */}
       <div className="bg-zinc-900 text-white p-4 rounded text-right text-3xl font-mono">
         {display}
+      </div>
+
+      {/* Barra de Memoria */}
+      <div className="grid grid-cols-4 gap-2 mb-2">
+        <button className="btn btn-fn text-xs" onClick={() => setMemory(0)}>MC</button>
+        <button className="btn btn-fn text-xs" onClick={() => setDisplay(String(memory))}>MR</button>
+        <button className="btn btn-fn text-xs" onClick={() => setMemory(memoryAdd(memory, parseFloat(display)))}>M+</button>
+        <button className="btn btn-fn text-xs" onClick={() => setMemory(memorySubtract(memory, parseFloat(display)))}>M-</button>
       </div>
 
       {/* Fila Científica: Potencias */}

@@ -1,5 +1,12 @@
 export type Operation = '+' | '-' | '*' | '/' | 'negate' | 'sqrt' | '%' | '^' | 'square';
 
+export function memoryAdd(mem: number, current: number): number {
+  return mem + current;
+}
+export function memorySubtract(mem: number, current: number): number {
+  return mem - current;
+}
+
 export function negateValue(val: number): number {
   return -val;
 }
@@ -16,7 +23,8 @@ export function resetCalculatorState(): CalcState {
 
 export function clearHistory(): [] {
   return [];
-  
+}
+
 export interface HistoryItem {
   id: string;
   expression: string;
