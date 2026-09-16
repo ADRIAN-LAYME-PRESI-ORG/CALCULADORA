@@ -42,7 +42,9 @@ export function calculate(a: number, b: number, op: Operation): number {
     case '+': return a + b;
     case '-': return a - b;
     case '*': return a * b;
-    case '/': return a / b;
+    case '/':
+      if (b === 0) throw new Error('ERR_DIV_ZERO');
+      return a / b;
     case '%': return (a * b) / 100;
     case '^': return Math.pow(a, b);
     case 'square': return Math.pow(b, 2);
