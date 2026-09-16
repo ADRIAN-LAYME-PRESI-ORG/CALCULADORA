@@ -14,6 +14,10 @@ export function resetCalculatorState(): CalcState {
   return { display: '0', prev: null, op: null };
 }
 
+export function clearHistory(): [] {
+  return [];
+}
+
 export function calculate(a: number, b: number, op: Operation): number {
   switch (op) {
     case '+': return a + b;

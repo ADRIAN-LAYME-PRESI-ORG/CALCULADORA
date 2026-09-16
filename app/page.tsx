@@ -1,11 +1,12 @@
 'use client';
 import { useState } from 'react';
-import { calculate, Operation, resetCalculatorState } from './calculator';
+import { calculate, Operation, resetCalculatorState, clearHistory } from './calculator';
 
 export default function Home() {
   const [display, setDisplay] = useState('0');
   const [prev, setPrev] = useState<number | null>(null);
   const [op, setOp] = useState<Operation | null>(null);
+  const [history, setHistory] = useState<any[]>([]);
 
   const handleDigit = (digit: string) => {
     setDisplay((current) => (current === '0' ? digit : current + digit));
@@ -52,6 +53,7 @@ export default function Home() {
       </div>
 
       {/* Teclado: LÍNEA CRÍTICA DE CONFLICTO (ambos insertarán filas/botones aquí) */}
+      {/* Fila Especial: Raíz cuadrada */}
       <div className="grid grid-cols-1 gap-2 mb-2">
         <button className="btn btn-fn" onClick={() => {
           const val = parseFloat(display);
@@ -90,6 +92,26 @@ export default function Home() {
         <button className="btn" onClick={() => handleDigit('3')}>3</button>
         <button className="btn" onClick={() => handleDigit('0')}>0</button>
       </div>
+
+      <section className="border-t border-zinc-800 pt-3">
+        <div className="flex justify-between items-center mb-2">
+          <h3 className="text-sm font-semibold text-zinc-400">Registro de Historial</h3>
+          <div className="flex gap-2">
+            <button
+              className="text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-2 py-1 rounded"
+              onClick={() => navigator.clipboard.writeText(display)}
+            >
+              Copiar Pantalla
+            </button>
+            <button
+              className="text-xs bg-red-900/50 hover:bg-red-800 text-red-200 px-2 py-1 rounded"
+              onClick={() => setHistory(clearHistory())}
+            >
+              Limpiar
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
