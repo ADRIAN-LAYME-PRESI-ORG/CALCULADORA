@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { calculate, Operation, removeLastChar, HistoryItem, addHistoryEntry, resetCalculatorState, clearHistory } from './calculator';
+import { calculate, Operation, removeLastChar, HistoryItem, addHistoryEntry, resetCalculatorState, clearHistory, appendDecimal } from './calculator';
 
 export default function Home() {
   const [display, setDisplay] = useState('0');
@@ -75,6 +75,7 @@ export default function Home() {
         <button className="btn" onClick={() => handleOperation('/')}>/</button>
         <button className="btn" onClick={() => handleOperation('*')}>*</button>
         <button className="btn" onClick={() => handleOperation('-')}>-</button>
+        <button className="btn font-bold" onClick={() => setDisplay((cur) => appendDecimal(cur))}>.</button>
 
         {/* Fila 2: 7, 8, 9, + */}
         <button className="btn" onClick={() => handleDigit('7')}>7</button>

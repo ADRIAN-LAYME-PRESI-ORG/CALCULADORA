@@ -16,12 +16,18 @@ export function resetCalculatorState(): CalcState {
 
 export function clearHistory(): [] {
   return [];
-  
+}
+
 export interface HistoryItem {
   id: string;
   expression: string;
   result: number;
   timestamp: string;
+}
+
+export function appendDecimal(current: string): string {
+  if (current.includes('.')) return current;
+  return current + '.';
 }
 
 export function calculate(a: number, b: number, op: Operation): number {
