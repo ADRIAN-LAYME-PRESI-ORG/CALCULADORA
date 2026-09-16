@@ -41,8 +41,8 @@ export default function Home() {
       </header>
 
       {/* Pantalla */}
-      <div className="bg-zinc-900 text-white p-4 rounded text-right text-3xl font-mono">
-        {display}
+      <div className="bg-zinc-900 text-white p-4 rounded text-right text-3xl font-mono overflow-x-auto truncate max-w-full">
+        {display.slice(0, 16)}
       </div>
 
       {/* Barra de Memoria */}
