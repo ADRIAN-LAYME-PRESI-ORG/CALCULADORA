@@ -43,6 +43,12 @@ export default function Home() {
       </div>
 
       {/* Teclado: LÍNEA CRÍTICA DE CONFLICTO (ambos insertarán filas/botones aquí) */}
+      <div className="grid grid-cols-1 gap-2 mb-2">
+        <button className="btn btn-fn" onClick={() => {
+          const val = parseFloat(display);
+          setDisplay(String(calculate(0, val, 'sqrt')));
+        }}>√x</button>
+      </div>
       <div className="grid grid-cols-4 gap-2">
         {/* Fila 1: Acciones básicas */}
         <button className="btn bg-red-500" onClick={() => setDisplay('0')}>C</button>
