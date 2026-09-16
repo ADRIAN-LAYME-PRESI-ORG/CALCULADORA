@@ -26,11 +26,15 @@ export default function Home() {
     }
   };
 
+  const handleToggleSign = () => {
+    setDisplay((current) => (current.startsWith('-') ? current.slice(1) : '-' + current));
+  };
+
   return (
     <main className="max-w-md mx-auto p-6 space-y-4 bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl w-full">
       {/* LÍNEA CRÍTICA DE CONFLICTO: Título */}
       <header className="border-b border-zinc-800 pb-2">
-        <h1 className="text-2xl font-bold text-amber-400">CALCULADORA VERSION adrianlaymepresi</h1>
+        <h1 className="text-2xl font-bold text-amber-400">CALCULADORA ORGANIZACION OFICIAL</h1>
       </header>
 
       {/* Pantalla */}
@@ -48,10 +52,17 @@ export default function Home() {
       </div>
 
       {/* Teclado: LÍNEA CRÍTICA DE CONFLICTO (ambos insertarán filas/botones aquí) */}
+      <div className="grid grid-cols-1 gap-2 mb-2">
+        <button className="btn btn-fn" onClick={() => {
+          const val = parseFloat(display);
+          setDisplay(String(calculate(0, val, 'sqrt')));
+        }}>√x</button>
+      </div>
       <div className="grid grid-cols-4 gap-2">
         {/* Fila 1: Acciones básicas */}
         <button className="btn bg-red-500" onClick={() => setDisplay('0')}>C</button>
         <button className="btn btn-fn" onClick={() => handleOperation('%')}>%</button>
+        <button className="btn btn-fn" onClick={handleToggleSign}>+/-</button>
         <button className="btn" onClick={() => handleOperation('/')}>/</button>
         <button className="btn" onClick={() => handleOperation('*')}>*</button>
         <button className="btn" onClick={() => handleOperation('-')}>-</button>
