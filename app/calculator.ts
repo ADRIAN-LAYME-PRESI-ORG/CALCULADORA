@@ -4,6 +4,19 @@ export function negateValue(val: number): number {
   return -val;
 }
 
+export interface CalcState {
+  display: string;
+  prev: number | null;
+  op: Operation | null;
+}
+
+export function resetCalculatorState(): CalcState {
+  return { display: '0', prev: null, op: null };
+}
+
+export function clearHistory(): [] {
+  return [];
+  
 export interface HistoryItem {
   id: string;
   expression: string;
