@@ -32,6 +32,11 @@ export interface HistoryItem {
   timestamp: string;
 }
 
+export function appendDecimal(current: string): string {
+  if (current.includes('.')) return current;
+  return current + '.';
+}
+
 export function calculate(a: number, b: number, op: Operation): number {
   switch (op) {
     case '+': return a + b;

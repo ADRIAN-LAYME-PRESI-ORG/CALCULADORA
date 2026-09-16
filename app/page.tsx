@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { calculate, Operation, removeLastChar, HistoryItem, addHistoryEntry, resetCalculatorState, clearHistory, memoryAdd, memorySubtract } from './calculator';
+import { calculate, Operation, removeLastChar, HistoryItem, addHistoryEntry, resetCalculatorState, clearHistory, appendDecimal, memoryAdd, memorySubtract } from './calculator';
 
 export default function Home() {
   const [display, setDisplay] = useState('0');
@@ -84,18 +84,19 @@ export default function Home() {
         <button className="btn" onClick={() => handleOperation('/')}>/</button>
         <button className="btn" onClick={() => handleOperation('*')}>*</button>
         <button className="btn" onClick={() => handleOperation('-')}>-</button>
+        <button className="btn" onClick={() => handleOperation('+')}>+</button>
 
-        {/* Fila 2: 7, 8, 9, + */}
+        {/* Fila 2: 7, 8, 9, = */}
         <button className="btn" onClick={() => handleDigit('7')}>7</button>
         <button className="btn" onClick={() => handleDigit('8')}>8</button>
         <button className="btn" onClick={() => handleDigit('9')}>9</button>
-        <button className="btn" onClick={() => handleOperation('+')}>+</button>
+        <button className="btn bg-emerald-600 hover:bg-emerald-500" onClick={handleEquals}>=</button>
 
-        {/* Fila 3: 4, 5, 6, = */}
+        {/* Fila 3: 4, 5, 6, . */}
         <button className="btn" onClick={() => handleDigit('4')}>4</button>
         <button className="btn" onClick={() => handleDigit('5')}>5</button>
         <button className="btn" onClick={() => handleDigit('6')}>6</button>
-        <button className="btn bg-emerald-600 hover:bg-emerald-500" onClick={handleEquals}>=</button>
+        <button className="btn font-bold" onClick={() => setDisplay((cur) => appendDecimal(cur))}>.</button>
 
         {/* Fila 4: 1, 2, 3, 0 */}
         <button className="btn" onClick={() => handleDigit('1')}>1</button>
