@@ -1,11 +1,12 @@
 'use client';
 import { useState } from 'react';
-import { calculate, Operation } from './calculator';
+import { calculate, Operation, removeLastChar, HistoryItem, addHistoryEntry } from './calculator';
 
 export default function Home() {
   const [display, setDisplay] = useState('0');
   const [prev, setPrev] = useState<number | null>(null);
   const [op, setOp] = useState<Operation | null>(null);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
 
   const handleDigit = (digit: string) => {
     setDisplay((current) => (current === '0' ? digit : current + digit));
@@ -19,8 +20,9 @@ export default function Home() {
 
   const handleEquals = () => {
     if (prev !== null && op) {
-      const result = calculate(prev, parseFloat(display), op);
-      setDisplay(String(result));
+      const res = calculate(prev, parseFloat(display), op);
+      setHistory(addHistoryEntry(history, prev, parseFloat(display), op, res));
+      setDisplay(String(res));
       setPrev(null);
       setOp(null);
     }
@@ -61,6 +63,7 @@ export default function Home() {
       <div className="grid grid-cols-4 gap-2">
         {/* Fila 1: Acciones básicas */}
         <button className="btn bg-red-500" onClick={() => setDisplay('0')}>C</button>
+        <button className="btn bg-amber-700" onClick={() => setDisplay(removeLastChar(display))}>⌫</button>
         <button className="btn btn-fn" onClick={() => handleOperation('%')}>%</button>
         <button className="btn btn-fn" onClick={handleToggleSign}>+/-</button>
         <button className="btn" onClick={() => handleOperation('/')}>/</button>
@@ -85,6 +88,18 @@ export default function Home() {
         <button className="btn" onClick={() => handleDigit('3')}>3</button>
         <button className="btn" onClick={() => handleDigit('0')}>0</button>
       </div>
+          
+      <section className="border-t border-zinc-800 pt-3">
+        <h3 className="text-sm font-semibold text-zinc-400 mb-2">Historial de Cálculos</h3>
+        <ul className="space-y-1 text-xs font-mono max-h-32 overflow-y-auto">
+          {history.map((h) => (
+            <li key={h.id} className="flex justify-between text-zinc-300 bg-zinc-900/60 p-1.5 rounded">
+              <span>{h.expression}</span>
+              <span className="font-bold text-amber-400">= {h.result}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }
