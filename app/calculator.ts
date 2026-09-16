@@ -12,3 +12,10 @@ export function calculate(a: number, b: number, op: Operation): number {
     default: return b;
   }
 }
+
+export function removeLastChar(display: string): string {
+  if (display.length <= 1 || (display.length === 2 && display.startsWith('-'))) {
+    return '0';
+  }
+  return display.slice(0, -1);
+}
