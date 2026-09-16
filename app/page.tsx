@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { calculate, Operation } from './calculator';
+import { calculate, Operation, resetCalculatorState } from './calculator';
 
 export default function Home() {
   const [display, setDisplay] = useState('0');
@@ -60,7 +60,12 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-4 gap-2">
         {/* Fila 1: Acciones básicas */}
-        <button className="btn bg-red-500" onClick={() => setDisplay('0')}>C</button>
+        <button className="btn bg-rose-600 font-bold" onClick={() => {
+          const fresh = resetCalculatorState();
+          setDisplay(fresh.display);
+          setPrev(fresh.prev);
+          setOp(fresh.op);
+        }}>AC</button>
         <button className="btn btn-fn" onClick={() => handleOperation('%')}>%</button>
         <button className="btn btn-fn" onClick={handleToggleSign}>+/-</button>
         <button className="btn" onClick={() => handleOperation('/')}>/</button>
